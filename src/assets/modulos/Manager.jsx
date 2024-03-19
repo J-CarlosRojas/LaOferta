@@ -64,6 +64,8 @@ const Manager = () => {
     }
   };
 
+
+  // Función que prepara los premios restantes para mostrarlos en la lista de premios sin mostrar.
   const calcularPremiosRestantes = () => {
     const premiosRestantes = carteles.filter(cartel => !cartel.destapado).map(cartel => cartel.premio).sort((a, b) => a - b);
     setPremiosRestantes(premiosRestantes);
