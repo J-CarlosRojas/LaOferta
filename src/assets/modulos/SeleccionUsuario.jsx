@@ -5,13 +5,13 @@ const SeleccionUsuario = ({ numeroSeleccion, premio, onClick, destapado }) => {
   return (
     <div
       onClick={onClick}
-      className=" `w-2/12 bg-slate-950 cursor-pointer ${
+      className=" `w-2/12 bg-slate-950 cursor-pointer min-w-4 ${
         destapado ? 'bg-green-500' : ''
       }`} 
     "
     >
-      <p>Cartel #{numeroSeleccion}</p>
-      <p>{destapado ? `Premio: ${premio}` : "Tapado"}</p>
+      <p className=" font-bold ">{numeroSeleccion}</p>
+      <p>{destapado ? `Premio: ${premio}` : "?"}</p>
     </div>
   );
 };

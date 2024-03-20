@@ -4,6 +4,7 @@ const DisplayOferta = ({oferta}) =>{
     return(
         //Muestra la oferta de la maquina.
         <div>
+            <p>La oferta es: </p>
             <p>{oferta}</p>
         </div>
     )

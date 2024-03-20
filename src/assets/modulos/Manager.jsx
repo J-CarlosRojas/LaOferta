@@ -44,6 +44,9 @@ const Manager = () => {
 
   const handleSeleccionCartel = (index) => {
     // Verificar si el cartel ya ha sido seleccionado
+    if (carteles[index].destapado) {
+      return; // No hacer nada si el cartel ya está destapado
+    }
 
     console.log("indice real de la seleccion  " + index);
 
@@ -64,10 +67,12 @@ const Manager = () => {
     }
   };
 
-
   // Función que prepara los premios restantes para mostrarlos en la lista de premios sin mostrar.
   const calcularPremiosRestantes = () => {
-    const premiosRestantes = carteles.filter(cartel => !cartel.destapado).map(cartel => cartel.premio).sort((a, b) => a - b);
+    const premiosRestantes = carteles
+      .filter((cartel) => !cartel.destapado)
+      .map((cartel) => cartel.premio)
+      .sort((a, b) => a - b);
     setPremiosRestantes(premiosRestantes);
   };
 
@@ -94,20 +99,21 @@ const Manager = () => {
   };
 
   const calcularOferta = () => {
-    setAjusteOferta(ajusteOferta + 0.1);
+    setAjusteOferta(ajusteOferta + ajusteOferta * 0.05);
+
+    console.log("el ajuste de oferta es de :" + ajusteOferta);
   };
 
   useEffect(() => {
     // Calculamos la oferta cada vez que se actualiza el estado de ajusteOferta o mediaPremios
     const nuevaOferta = (mediaPremios * ajusteOferta).toFixed(2);
     setOferta(nuevaOferta);
-
   }, [mediaPremios, ajusteOferta]);
 
   return (
     <div>
       <DisplayOferta oferta={oferta < 1 ? "Oferta" : oferta} />
-      <div className="flex space-x-4 items-center text-fuchsia-100">
+      <div className="flex flex-wrap space-x-4 items-center text-fuchsia-100">
         {carteles.map((cartel, index) => (
           <SeleccionUsuario
             key={index}
