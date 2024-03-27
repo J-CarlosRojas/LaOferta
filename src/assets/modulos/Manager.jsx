@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import DisplayOferta from "./DisplayOferta";
 import SeleccionUsuario from "./SeleccionUsuario";
 import ListaTapados from "./ListaTapados";
+import Boton from "./Boton";
+import Resultado from "./Resultado";
+
 
 const Manager = () => {
   const premios = [
@@ -14,6 +17,8 @@ const Manager = () => {
   const [ajusteOferta, setAjusteOferta] = useState(0.8);
   const [oferta, setOferta] = useState(0);
   const [premiosRestantes, setPremiosRestantes] = useState([]);
+  const [modal, setModal] = useState(false)
+
 
   useEffect(() => {
     asignarPremiosACarteles();
@@ -110,9 +115,21 @@ const Manager = () => {
     setOferta(nuevaOferta);
   }, [mediaPremios, ajusteOferta]);
 
+  
+  const cambiarModal = ( ) => {
+    setModal(!modal)
+    console.log( 'estado del modal' + modal)
+    console.log( carteles[pickUsuario].premio )
+  }
+
+ 
   return (
     <div>
-      <DisplayOferta oferta={oferta < 1 ? "Oferta" : oferta} />
+      <div>
+        <DisplayOferta oferta={oferta < 1 ? "Oferta" : oferta} />
+        <Boton onClick={cambiarModal} texto={"Aceptar Oferta"} />
+      </div>
+
       <div className="flex flex-wrap space-x-4 items-center text-fuchsia-100">
         {carteles.map((cartel, index) => (
           <SeleccionUsuario
@@ -127,6 +144,7 @@ const Manager = () => {
       <div>
         <ListaTapados premiosRestantes={premiosRestantes}></ListaTapados>
       </div>
+         <Resultado cambiarModal={cambiarModal} modal={modal} />
     </div>
   );
 };
