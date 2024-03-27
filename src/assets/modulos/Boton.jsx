@@ -1,9 +1,9 @@
 import React from "react";
 
-const Boton = (onClick, leyenda) => {
+const Boton = ({onClick, texto}) => {
     return(
         <button onClick={onClick}>
-            {leyenda} 
+            {texto} 
         </button>
     )
 }
