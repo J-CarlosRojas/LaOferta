@@ -1,8 +1,4 @@
-# React + Vite
+# La Oferta
+Este es un proyecto con fines educativos. Consiste en un juego en el que el jugador seleccionará un primer cartel, el cual será su premio. Después de eso, irá seleccionando los premios que no escogió y "la máquina" ofrecerá una cantidad llamada oferta, la cual el jugador podrá aceptar o rechazar.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+El fin del juego consiste en que el jugador decida si se arriesga a seguir abriendo carteles y posiblemente perder las mejores opciones, o tomar la oferta, que seguramente será menor que el premio mayor.
