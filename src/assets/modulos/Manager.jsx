@@ -5,7 +5,6 @@ import ListaTapados from "./ListaTapados";
 import Boton from "./Boton";
 import Resultado from "./Resultado";
 
-
 const Manager = () => {
   const premios = [
     0.1, 300, 5000, 25000, 45000, 50000, 60000, 75000, 90000, 100000,
@@ -17,8 +16,8 @@ const Manager = () => {
   const [ajusteOferta, setAjusteOferta] = useState(0.8);
   const [oferta, setOferta] = useState(0);
   const [premiosRestantes, setPremiosRestantes] = useState([]);
-  const [modal, setModal] = useState(false)
-
+  const [modal, setModal] = useState(false);
+  const [aceptoOferta, setAceptoOferta] = useState(false);
 
   useEffect(() => {
     asignarPremiosACarteles();
@@ -99,8 +98,6 @@ const Manager = () => {
     } else {
       setMediaPremios(sumaPremios / cartelesNoDestapados);
     }
-
-    console.log("Media de los premios aun tapados " + mediaPremios);
   };
 
   const calcularOferta = () => {
@@ -115,19 +112,20 @@ const Manager = () => {
     setOferta(nuevaOferta);
   }, [mediaPremios, ajusteOferta]);
 
-  
-  const cambiarModal = ( ) => {
-    setModal(!modal)
-    console.log( 'estado del modal' + modal)
-    console.log( carteles[pickUsuario].premio )
-  }
+  const cambiarModal = () => {
+    setModal(!modal);
+  };
 
- 
+  const aceptarOferta = () => {
+    cambiarModal();
+    setAceptoOferta(true);
+  };
+
   return (
     <div>
       <div>
         <DisplayOferta oferta={oferta < 1 ? "Oferta" : oferta} />
-        <Boton onClick={cambiarModal} texto={"Aceptar Oferta"} />
+        <Boton onClick={aceptarOferta} texto={"Aceptar Oferta"} />
       </div>
 
       <div className="flex flex-wrap space-x-4 items-center text-fuchsia-100">
@@ -144,7 +142,21 @@ const Manager = () => {
       <div>
         <ListaTapados premiosRestantes={premiosRestantes}></ListaTapados>
       </div>
-         <Resultado cambiarModal={cambiarModal} modal={modal} />
+      <Resultado
+        cambiarModal={cambiarModal}
+        modal={modal}
+        oferta={oferta}
+        premio={
+          carteles[pickUsuario] !== undefined && carteles[pickUsuario] !== null
+            ? carteles[pickUsuario].premio
+            : "No hay premio seleccionado"
+        }
+        aceptoOferta={
+          aceptoOferta == true
+            ? true
+            : false
+        }
+      />
     </div>
   );
 };
