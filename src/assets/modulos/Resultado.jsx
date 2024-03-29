@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Boton from "./Boton";
 
 const Resultado = ({ cambiarModal, modal, oferta, premio, aceptoOferta }) => {
@@ -12,15 +12,15 @@ const Resultado = ({ cambiarModal, modal, oferta, premio, aceptoOferta }) => {
 
   if (aceptoOferta) {
     textoAceptoOferta = "Aceptaste la oferta ";
-    ganoPerdio()
+    ganoPerdio();
   } else {
     textoAceptoOferta = "Te quedaste con tu cartel";
   }
 
-  function ganoPerdio ( ){
-    if(aceptoOferta){
-      if(oferta > premio && premio !== null){
-        textoGanoPerdio = "Ganaste!" + (oferta - premio)
+  function ganoPerdio() {
+    if (aceptoOferta) {
+      if (oferta > premio && premio !== null) {
+        textoGanoPerdio = "Ganaste! " + (oferta - premio);
       }
     }
   }
