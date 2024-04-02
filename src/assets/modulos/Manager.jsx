@@ -4,6 +4,7 @@ import SeleccionUsuario from "./SeleccionUsuario";
 import ListaTapados from "./ListaTapados";
 import Boton from "./Boton";
 import Resultado from "./Resultado";
+import Instrucciones from "./Instrucciones";
 
 const Manager = () => {
   const premios = [
@@ -42,17 +43,15 @@ const Manager = () => {
       });
       premiosDisponibles.splice(premioIndex, 1);
     }
-
     setCarteles(nuevosCarteles);
   };
 
+  //Función principal de destape de carteles.
   const handleSeleccionCartel = (index) => {
     // Verificar si el cartel ya ha sido seleccionado
     if (carteles[index].destapado) {
       return; // No hacer nada si el cartel ya está destapado
     }
-
-    console.log("indice real de la seleccion  " + index);
 
     //Condicion para la seleccion del ususario
     if (cartelesSeleccionados == 0) {
@@ -60,12 +59,17 @@ const Manager = () => {
       setCartelesSeleccionados(cartelesSeleccionados + 1);
     }
 
+    //final del juego por carteles seleccionados ( se debe actualizar el valor de index según cuantos carteles hay)
+    if (cartelesSeleccionados > 0 && pickUsuario != index && index == 7) {
+      setModal(!modal);
+    }
+
     //condición para las selecciones a destapar
     if (cartelesSeleccionados > 0 && pickUsuario != index) {
       const nuevosCarteles = [...carteles];
       nuevosCarteles[index].destapado = true;
       setCarteles(nuevosCarteles);
-      setCartelesSeleccionados([cartelesSeleccionados + 1]);
+      setCartelesSeleccionados(cartelesSeleccionados + 1);
       calcularMediaPremios();
       calcularOferta();
     }
@@ -88,11 +92,9 @@ const Manager = () => {
       if (!carteles[i].destapado) {
         sumaPremios += carteles[i].premio;
         cartelesNoDestapados++;
-        console.log(carteles[i].premio);
       }
     }
 
-    console.log(" suma de los premios " + sumaPremios);
     if (cartelesNoDestapados === 0) {
       setMediaPremios(0);
     } else {
@@ -102,8 +104,6 @@ const Manager = () => {
 
   const calcularOferta = () => {
     setAjusteOferta(ajusteOferta + ajusteOferta * 0.05);
-
-    console.log("el ajuste de oferta es de :" + ajusteOferta);
   };
 
   useEffect(() => {
@@ -116,6 +116,10 @@ const Manager = () => {
     setModal(!modal);
   };
 
+  const recargarPagina = () => {
+    window.location.reload();
+  };
+
   const aceptarOferta = () => {
     cambiarModal();
     setAceptoOferta(true);
@@ -123,6 +127,9 @@ const Manager = () => {
 
   return (
     <div>
+      <div>
+        <Instrucciones cartelesSeleccionados={cartelesSeleccionados} />
+      </div>
       <div>
         <DisplayOferta oferta={oferta < 1 ? "Oferta" : oferta} />
         <Boton onClick={aceptarOferta} texto={"Aceptar Oferta"} />
@@ -143,7 +150,7 @@ const Manager = () => {
         <ListaTapados premiosRestantes={premiosRestantes}></ListaTapados>
       </div>
       <Resultado
-        cambiarModal={cambiarModal}
+        recargarPagina={recargarPagina}
         modal={modal}
         oferta={oferta}
         premio={
@@ -151,11 +158,7 @@ const Manager = () => {
             ? carteles[pickUsuario].premio
             : "No hay premio seleccionado"
         }
-        aceptoOferta={
-          aceptoOferta == true
-            ? true
-            : false
-        }
+        aceptoOferta={aceptoOferta == true ? true : false}
       />
     </div>
   );

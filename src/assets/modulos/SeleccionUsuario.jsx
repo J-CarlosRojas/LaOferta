@@ -5,10 +5,10 @@ const SeleccionUsuario = ({ numeroSeleccion, premio, onClick, destapado }) => {
   return (
     <div
       onClick={onClick}
-      className=" `w-2/12 bg-slate-950 cursor-pointer min-w-4 ${
-        destapado ? 'bg-green-500' : ''
-      }`} 
-    "
+      className={`w-2/12 cursor-pointer min-w-4 ${
+        destapado ? 'bg-green-500' : ' bg-red-500'
+      }`}
+    
     >
       <p className=" font-bold ">{numeroSeleccion}</p>
       <p>{destapado ? `Premio: ${premio}` : "?"}</p>
@@ -17,5 +17,3 @@ const SeleccionUsuario = ({ numeroSeleccion, premio, onClick, destapado }) => {
 };
 
 export default SeleccionUsuario;
-
-

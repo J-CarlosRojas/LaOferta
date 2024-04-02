@@ -1,7 +1,7 @@
 import React from "react";
 import Boton from "./Boton";
 
-const Resultado = ({ cambiarModal, modal, oferta, premio, aceptoOferta }) => {
+const Resultado = ({ recargarPagina, modal, oferta, premio, aceptoOferta }) => {
   if (!modal) return null;
 
   const premioTexto =
@@ -15,12 +15,22 @@ const Resultado = ({ cambiarModal, modal, oferta, premio, aceptoOferta }) => {
     ganoPerdio();
   } else {
     textoAceptoOferta = "Te quedaste con tu cartel";
+    ganoPerdio();
   }
 
+  //Función que determina si el jugador tomó la mejor opción.
   function ganoPerdio() {
     if (aceptoOferta) {
       if (oferta > premio && premio !== null) {
-        textoGanoPerdio = "Ganaste! " + (oferta - premio);
+        textoGanoPerdio = "Ganaste! " + (oferta - premio).toFixed(2);
+      } else {
+        textoGanoPerdio = "Perdiste :( " + (premio - oferta).toFixed(2);
+      }
+    } else {
+      if (premio > oferta && premio !== null) {
+        textoGanoPerdio = "Ganaste! " + (premio - oferta).toFixed(2);
+      } else {
+        textoGanoPerdio = "Perdiste :( " + (oferta - premio).toFixed(2);
       }
     }
   }
@@ -32,7 +42,7 @@ const Resultado = ({ cambiarModal, modal, oferta, premio, aceptoOferta }) => {
         <p>{textoGanoPerdio}</p>
         <p>{premioTexto}</p>
         <p>La oferta es: {oferta}</p>
-        <Boton onClick={cambiarModal} texto={"Cerrar Modal"} />
+        <Boton onClick={recargarPagina} texto={"Reiniciar"} />
       </div>
     </div>
   );
