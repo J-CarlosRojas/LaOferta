@@ -5,6 +5,7 @@ import ListaTapados from "./ListaTapados";
 import Boton from "./Boton";
 import Resultado from "./Resultado";
 import Instrucciones from "./Instrucciones";
+import "../estilos/Manager.css"
 
 const Manager = () => {
   const premios = [
@@ -127,20 +128,23 @@ const Manager = () => {
 
   return (
     <div>
-      <div>
-        <Instrucciones cartelesSeleccionados={cartelesSeleccionados} />
+      <div className="flex flex-wrap justify-evenly mx-32 my-2">
+        <div>
+          <DisplayOferta oferta={oferta < 1 ? "No hay oferta aún" : oferta }  />
+          <Boton onClick={aceptarOferta} texto={"Aceptar Oferta"} />
+        </div>
+        <div className="flex items-center justify-center">
+          <p className=" text-9xl font-principal logo-dinero text-naranja pt-3 ">$</p>
+        </div>
       </div>
-      <div>
-        <DisplayOferta oferta={oferta < 1 ? "Oferta" : oferta} />
-        <Boton onClick={aceptarOferta} texto={"Aceptar Oferta"} />
-      </div>
+      <Instrucciones cartelesSeleccionados={cartelesSeleccionados} />
 
-      <div className="flex flex-wrap space-x-4 items-center text-fuchsia-100">
+      <div className="  flex flex-wrap items-center justify-center bg-rojo ">
         {carteles.map((cartel, index) => (
           <SeleccionUsuario
             key={index}
             premio={cartel.destapado ? cartel.premio : null}
-            numeroSeleccion={index + 1}
+            
             onClick={() => handleSeleccionCartel(index)}
             destapado={cartel.destapado}
           />

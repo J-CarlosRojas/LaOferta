@@ -1,17 +1,14 @@
 import React from "react";
 /*Este componente le renderiza los botones que el usuario puede seleccionar*/
 
-const SeleccionUsuario = ({ numeroSeleccion, premio, onClick, destapado }) => {
+const SeleccionUsuario = ({ premio, onClick, destapado }) => {
   return (
     <div
       onClick={onClick}
-      className={`w-2/12 cursor-pointer min-w-4 ${
-        destapado ? 'bg-green-500' : ' bg-red-500'
-      }`}
-    
+      className="w-16 h-16 cursor-pointer bg-crema text-rojo m-4 rounded-md flex items-center justify-center
+      "
     >
-      <p className=" font-bold ">{numeroSeleccion}</p>
-      <p>{destapado ? `Premio: ${premio}` : "?"}</p>
+      <p className=" text-center font-bold ">{destapado ? `$ ${premio}` : "?"}</p>
     </div>
   );
 };

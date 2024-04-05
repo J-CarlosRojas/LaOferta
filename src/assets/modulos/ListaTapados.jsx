@@ -2,8 +2,8 @@ import React from "react";
 
 const ListaTapados = ({ premiosRestantes }) => {
   return (
-    <div>
-      <p>Premios Restantes</p>
+    <div className="bg-amarillo max-w-46 pt-6 " >
+      <p className=" font-principal  text-cyan-800 text-2xl " >Premios Restantes</p>
       <div></div>
       <ul>
         {premiosRestantes.map((premio, index) => (

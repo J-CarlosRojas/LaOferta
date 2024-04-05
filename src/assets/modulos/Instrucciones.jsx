@@ -14,14 +14,14 @@ const Instrucciones = ({ cartelesSeleccionados }) => {
     }
     if (cartelesSeleccionados === 6) {
       setInstruccion(
-        "Es tu última tirada, decide si quieres la oferta o te quedas con tu cartel"
+        "Es tu última tirada, decide si quieres tomar la oferta o te quedas con tú cartel"
       );
     }
   }, [cartelesSeleccionados]);
 
   return (
-    <div>
-      <p>{instruccion}</p>
+    <div className=" mb-4 mt-4 ">
+      <p className=" text-2xl font-secundaria text-[#8C2B3D] ">{instruccion}</p>
     </div>
   );
 };
