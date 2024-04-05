@@ -12,7 +12,7 @@ const Instrucciones = ({ cartelesSeleccionados }) => {
         "Puedes escoger la oferta o continuar descartando carteles"
       );
     }
-    if (cartelesSeleccionados === 6) {
+    if (cartelesSeleccionados === 7) {
       setInstruccion(
         "Es tu última tirada, decide si quieres tomar la oferta o te quedas con tú cartel"
       );
